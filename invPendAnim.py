@@ -4,7 +4,8 @@ from matplotlib.animation import FuncAnimation
 import matplotlib.patches as patches
 
 # Load simulation data
-data = np.load('simulationData.npy')
+#data = np.load('simulationData.npy')
+data = np.load('simulationControlled.npy')
 
 l = 1.0  # Pendulum length fixed
 
@@ -34,8 +35,8 @@ cart = patches.Rectangle((0, 0), cart_width, cart_height, fc='blue', ec='black')
 ax.add_patch(cart)
 
 # Two wheels on bottom corners of the cart
-wheel_left = patches.Circle((0, 0), wheel_radius, fc='grey')
-wheel_right = patches.Circle((0, 0), wheel_radius, fc='grey')
+wheel_left = patches.Circle((0, 0), wheel_radius, fc='grey', ec='black')
+wheel_right = patches.Circle((0, 0), wheel_radius, fc='grey', ec='black')
 ax.add_patch(wheel_left)
 ax.add_patch(wheel_right)
 
@@ -69,7 +70,7 @@ def update(frame):
     wheel_right.center = (cart_x + cart_width/3, 0)
     
     # Adjust angle for pendulum below the cart
-    angle = theta[frame] - np.pi
+    angle = theta[frame]+np.pi
     
     pivot_x = cart_x
     pivot_y = cart_height
